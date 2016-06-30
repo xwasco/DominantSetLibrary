@@ -1,1 +1,4 @@
-# DominantSetLibrary
+#Dominant Set Library
+===========
+
+The Dominant Set Library (DSLib) is an open source Matlab library implementing the Dominant Set Framework (DSF). The DSF is a graph-based clustering technique rooted in the evolutionary game theory that starts gaining lots of interests in the computer science community. It has been originally introduced in (Dominant Sets and Pairwise Clustering , M.Pavan & M.Pelillo, PAMI 2007) and, thanks to its duality with game theory, has been explored in many directions not only related to clustering problems. For example applications in matching, segmentation, classification, biomedical imaging and network analysis are common in literature using the original approach. In this package we propose not only the original implementation but a still growing collections, as more comprehensive as possible, of methods and hacks from different researchers and users based on the original core.

@@ -1,5 +1,28 @@
 function [x,iters,NashError] = inImDynM(A,x,toll,maxIters)
 %INIMDYNM Infection-Immunization dynamcs. 
+%
+% Input:
+%   A           A pairwise nxn similarity matrix (with zero diagonal)
+%
+%   x           An nx1 vector in the n-dimensional simplex (it should add up to 1).
+%
+%   toll        The precision required from the dynamical system
+%
+%   maxIters    The maximum numer of iterations
+%
+% Output:
+%
+%   x           The population vector at convergence
+%
+%   iters       The number of iterations needed to converge
+%
+%   NashError   The precision reached by the dynamical system
+%
+%
+% If you use the Infection Immunization Dynamics please cite this work:
+% [2] S. Rota Bulo, and I. M. Bomze.  Infection and immunization:  a new class of evolutionarygame dynamics.
+% Games and Economic Behaviour, vol.  71, pp.  193–211, 2011.Special issue in honor of John F. Nash, jr.
+%
 
     iters=1;
     NashError=2*toll;
@@ -42,13 +65,13 @@ function [x,iters,NashError] = inImDynM(A,x,toll,maxIters)
 end
 
 function [i] = selectPureStrategy(x,r)
-index=1:length(x);
-mask = x>0;
-masked_index = index(mask);
-[~, i] = max(r);
-[~, j] = min(r(x>0));
-j = masked_index(j);
-if r(i)<-r(j)
-    i = j;
-end
+    index=1:length(x);
+    mask = x>0;
+    masked_index = index(mask);
+    [~, i] = max(r);
+    [~, j] = min(r(x>0));
+    j = masked_index(j);
+    if r(i)<-r(j)
+        i = j;
+    end
 end

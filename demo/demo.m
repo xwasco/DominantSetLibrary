@@ -5,9 +5,6 @@ clc
 
 rng('default');
 
-run('setup.m');
-
-
 %% Create a set of vertices (4 clusters)
 numPts=500;
 pts=[randn(numPts,2) ; randn(numPts,2)+[20,20] ; randn(numPts,2)+[0,20] ; randn(numPts,2)+[20,0]];

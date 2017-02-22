@@ -119,11 +119,11 @@ while ~isempty(A) && numel(nonzeros(A))>0
     
     %if >1
         if dynType==1
-            %if exist('inImDynC','file')==3
-            %    [x,iters,nasherror]=inImDynC(A,x,precision,int32(maxIters));    
-            %else
-            [x,iters,nasherror]=inImDynM(A,x,precision,int32(maxIters));    
-            %end
+            if exist('inImDynC','file')==3
+                [x,iters,nasherror]=inImDynC(A,x,precision,int32(maxIters));    
+            else
+                [x,iters,nasherror]=inImDynM(A,x,precision,int32(maxIters));    
+            end
         elseif dynType==2
             [x,iters,nasherror]=ExpRepDyn(A,x,precision,maxIters,kappa);
         else

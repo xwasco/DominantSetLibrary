@@ -7,7 +7,8 @@ rng('default');
 
 %% Create a set of vertices (4 clusters)
 numPts=100;
-pts=[randn(numPts,2) ; [randn(numPts,1)+20,randn(numPts,1)+20] ; [randn(numPts,1),randn(numPts,1)+20] ; [randn(numPts,1)+20,randn(numPts,1)]];
+cx = [0 0;20 20 ;0 20; 20 0]; %center of the clouds of points
+pts= repmat(cx,numPts,1) + randn(numPts*size(cx,1),2);
 
 %% Create the edge-weighted graph (affinity matrix)
 D=pdist(pts); %all the pairwise distances

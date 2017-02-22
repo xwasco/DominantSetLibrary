@@ -1,13 +1,9 @@
 function [x,iters,NashError] = inImDynM(A,x,toll,maxIters)
 %INIMDYNM Infection-Immunization dynamcs. 
-% If you use this code please cite
-if exist('inImDynC','file')==3
-    [x,iters,NashError]=inImDynC(A,x,toll,int32(maxIters));
-else
+
     iters=1;
     NashError=2*toll;
-    x=x';
-    
+
     g = A*x;
     while iters<maxIters && NashError>=toll
         r = g - (x'*g);
@@ -43,8 +39,6 @@ else
         
         iters=iters+1;
     end
-end
-
 end
 
 function [i] = selectPureStrategy(x,r)

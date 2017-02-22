@@ -12,7 +12,7 @@ A=A.*not(eye(size(A))); %the graph should not have the self-loop
 dynType=1; %0=Replicator Dynamics, 1=InfectionImmunization 2=Exponential replicator dynamics
 precision=1e-6; %the precision required from the dynamical system
 maxIters=1000; %number of maximum iteration of the dynamical system
-x=ones(size(A,1))./size(A,1); %starting point of the dynamical system
+x=ones(size(A,1),1)./size(A,1); %starting point of the dynamical system
 theta=1e-5; %threshold used to extract the support from x.
 
 [C]=dominantset(A,x,theta,precision,maxIters,dynType);

@@ -3,21 +3,12 @@ clear all
 
 clc
 
-%rng('default');
-
-run('setup.m');
-
+rng('default');
 
 %% Create a set of vertices (4 clusters)
 numPts=100;
-pts=[randn(numPts,2) ; [randn(numPts,1)+20,randn(numPts,1)+20] ; [randn(numPts,1),randn(numPts,1)+20] ; [randn(numPts,1)+20,randn(numPts,1)]];
-
-%% Create the edge-weighted graph (affinity matrix)
-D=pdist(pts); %all the pairwise distances
-sigma=var(D); %an heuristic to tune sigma
-A=squareform(exp(-D./(10*sigma))); %compute the affinity matrix of the graph as a Gaussian Kernel
-
-A=A.*not(eye(size(A))); %no self-loop, set the diagonal to zero IMPORTANT !
+cx = [0 0;20 20 ;0 20; 20 0]; %center of the clouds of points
+pts= repmat(cx,numPts,1) + randn(numPts*size(cx,1),2);
 
 %% Create the edge-weighted graph (affinity matrix)
 D=pdist(pts); %all the pairwise distances

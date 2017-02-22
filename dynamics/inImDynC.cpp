@@ -1,5 +1,5 @@
 /*
- Infection-Immunization dynamcs. 
+ Infection-Immunization dynamics. 
 
  This mex file has been written by Dr. Samuel Rota Bulo
  

@@ -26,7 +26,7 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %   precision           The maximum population distance (Euclidean) between two
 %                       successive steps to consider the dynamics in equilibrium (default 1e-8).
 %   maxIters            Maximum number of iterations of the dynamical systems (both Infection Immunization of
-%                       Replicator). Default = n.
+%                       Replicator). Default = 1000.
 %   dynType             Set to 0 for the Replicator Dynamics, 1 for the InfectionImmunization dynamics and 2 for the Exponential Replicator Dynamics (default 1).
 %                       For large dataset (n>1000) the use of dynType=1 is highly reccomended.
 %
@@ -75,7 +75,7 @@ if nargin<6 || isempty(dynType)
 end
  
 if nargin<5 || isempty(maxIters)
-    maxIters=max(1000,10^(ceil(log10(size(A,1)))+1));
+    maxIters=1000; %max(1000,10^(ceil(log10(size(A,1)))+1));
 end
 
 if nargin<4 || isempty(precision)
@@ -83,7 +83,7 @@ if nargin<4 || isempty(precision)
 end
 
 if nargin<3  || isempty(supportThreshold)
-    supportThreshold=max(1e-4,10^-(ceil(log10(size(A,1)))+1));
+    supportThreshold=1e-4; %max(1e-4,10^-(ceil(log10(size(A,1)))+1));
 end
 
 if nargin<2 || isempty(x0)

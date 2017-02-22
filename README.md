@@ -19,7 +19,7 @@ If you use the prototype generation method please cite:
 ## Beginning:
 Execute the 'setup.m' script in order to set the path and compile the mex files. In folder demo there are three example for the usage of the package.
 
-The dominantset.m file perform the clustering. The helper associated to the dominantset.m file (type: help dominantset in you Matlab environment) will show you all the paramters and some hints.
+The dominantset.m file perform the clustering. The helper associated to the dominantset.m file (type: help dominantset in your Matlab environment) will show you all the parameters and some hints.
 
 ## Requisite:
 No particular requisite are needed, the library run on any environment (Windows, Linux, Mac) and it has no dependencies. It has been tested on Matlab 2014b and 2016b in Windows/Linux and MacOSX. Some components are written in C for optimization purpose but equivalent Matlab code are available without the needing of compiling them.

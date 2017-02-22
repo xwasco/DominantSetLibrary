@@ -3,10 +3,7 @@ clear all
 
 clc
 
-%rng('default');
-
-run('setup.m');
-
+rng('default');
 
 %% Create a set of vertices (4 clusters)
 numPts=100;

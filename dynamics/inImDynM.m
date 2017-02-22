@@ -6,6 +6,7 @@ if exist('inImDynC','file')==3
 else
     iters=1;
     NashError=2*toll;
+    x=x';
     
     g = A*x;
     while iters<maxIters && NashError>=toll

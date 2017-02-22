@@ -75,7 +75,7 @@ if nargin<6 || isempty(dynType)
 end
  
 if nargin<5 || isempty(maxIters)
-    maxIters=1000; %max(1000,10^(ceil(log10(size(A,1)))+1));
+    maxIters=max(1000,10^(ceil(log10(size(A,1)))+1));
 end
 
 if nargin<4 || isempty(precision)
@@ -83,7 +83,7 @@ if nargin<4 || isempty(precision)
 end
 
 if nargin<3  || isempty(supportThreshold)
-    supportThreshold=1e-4; %max(1e-4,10^-(ceil(log10(size(A,1)))+1));
+    supportThreshold=max(1e-4,10^-(ceil(log10(size(A,1)))+1));
 end
 
 if nargin<2 || isempty(x0)

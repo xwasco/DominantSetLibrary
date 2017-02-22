@@ -28,7 +28,7 @@ No particular requisite are needed, the library run on any environment (Windows,
 In this version of the library we have implemented the following papers: Pavan and Pelillo (2003, 2007); Rota Bulo and Bomze (2011); Vascon et al. (2013) and a still growing set of papers will be added in the future.
 
 ### Dynamical systems
-The method uses a dynamical system to extract the dominant sets. The library comes with three different type of dynamics, RepDyn, ExpRep-Dyn, InfImm, and it can be easily extended to upcoming new optimization method for the program (1).
+The method uses a dynamical system to extract the dominant sets. The library comes with three different type of dynamics, RepDyn, ExpRep-Dyn, InfImm, and it can be easily extended to upcoming new optimization method.
 
 ## Pratical usage
 In this section we show how to setup a basic running example to cluster a generated synthetic dataset.

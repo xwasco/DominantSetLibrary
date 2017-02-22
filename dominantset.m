@@ -62,8 +62,6 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 
-addpath(genpath('dynamics'));
-
 if nargin<8
     pts=[];
 end

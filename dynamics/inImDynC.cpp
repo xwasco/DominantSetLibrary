@@ -1,3 +1,13 @@
+/*
+ Infection-Immunization dynamcs. 
+
+ This mex file has been written by Dr. Samuel Rota Bulo
+ 
+ If you use the Infection Immunization Dynamics please cite this work:
+ [2] S. Rota Bulo, and I. M. Bomze.  Infection and immunization:  a new class of evolutionarygame dynamics.
+ Games and Economic Behaviour, vol.  71, pp.  193–211, 2011.Special issue in honor of John F. Nash, jr.
+*/
+
 #include <string.h>
 #include "mex.h"
 

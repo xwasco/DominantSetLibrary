@@ -117,9 +117,9 @@ P=[];
 while ~isempty(A) && numel(nonzeros(A))>0
     x=x0(d); x=x./sum(x);
     
-    %if >1
         if dynType==1
             if exist('inImDynC','file')==3
+                %if the mex exist use it
                 [x,iters,nasherror]=inImDynC(A,x,precision,int32(maxIters));    
             else
                 [x,iters,nasherror]=inImDynM(A,x,precision,int32(maxIters));    
@@ -135,18 +135,14 @@ while ~isempty(A) && numel(nonzeros(A))>0
         
         [~,p]=max(x); p=d(p);
         idx=d(xid);    
-    %else
-    %    xid=1;
-    %    idx=d(1);
-    %    cohes=0;
-    %    iters=0;
-    %    nasherror=0;
-    %    p=d(1);
-    %end
+    
     
     C(idx)=cid;
-    stat(cid,:)=[cohes,iters,nasherror,p];
-
+    
+    if nargout>=2
+        stat(cid,:)=[cohes,iters,nasherror,p];
+    end
+    
     if nargout>=3
         S{cid,1}.index=idx;
         S{cid,1}.cohesiveness=cohes;

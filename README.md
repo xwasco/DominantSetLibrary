@@ -36,7 +36,7 @@ In this section we show how to setup a basic running example to cluster a genera
 Step 1: Generating data and build the affinity matrix A:
 ```
 rng('default'); % For reproducibility
-cx = [1 1;5 5 ;8 8]; %center of the clouds of points
+cx = [1 1;10 10 ;20 20]; %center of the clouds of points
 npts=100; pts= repmat(cx,npts,1) + randn(npts*size(cx,1),2);
 A=pdist(pts); %pairwise Euclidean distances
 s=3*var(A); %an euristic to find sigma

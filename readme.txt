@@ -22,17 +22,17 @@ rng('default'); % For reproducibility
 cx = [1 1;5 5 ;8 8]; %center of the clouds of points
 npts=100; pts= repmat(cx,npts,1) + randn(npts*size(cx,1),2);
 A=pdist(pts); %pairwise Euclidean distances
-s=3*var(A); %an euristic to find sigma
-A=exp(−A./s); A=squareform(A); %from distance to similarity
+s=3*var(A); %a heuristic to find sigma
+A=exp(-A./s); A=squareform(A); %from distance to similarity
 A=A.*not(eye(size(A))); %the graph should not have self−loops
 
 Step 2: Choosing the evolutionary dynamics and the DS parameters:
 
 dynType=1; %0=Replicator Dynamics, 1=InfectionImmunization 2=Exponential replicator dynamics
-precision=1e−6; %the precision required from the dynamical system
+precision=1e-6; %the precision required from the dynamical system
 maxIters=1000; %number of maximum iteration of the dynamical system
-x=ones(size(A,1))./size(A,1); %starting point of the dynamical system
-theta=1e−5; %threshold used to extract the support from x.
+x=ones(size(A,1),1)./size(A,1); %starting point of the dynamical system
+theta=1e-5; %threshold used to extract the support from x.
 
 
 Step 3: Call the clustering method

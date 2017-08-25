@@ -15,6 +15,14 @@ If you use the prototype generation method please cite:
 
 [3] S. Vascon et al. Using Dominant Sets for k-NN Prototype Selection. ICIAP 2013
 
+If you use this implementation of the Dominant Set please cite this:
+@misc{vascon2017dominantsetlib,
+  title = {{A Matlab library for the Dominant Set clustering }},
+  author = {Sebastiano Vascon},
+  howpublished = {\url{https://github.com/xwasco/DominantSetLibrary}},
+  note = {Accessed: [Insert date here]}
+}
+
 
 ## Beginning:
 Execute the 'setup.m' script in order to set the path and compile the mex files. In folder demo there are three example for the usage of the package.

@@ -24,12 +24,12 @@ If you use this implementation of the Dominant Set please cite this:
 
 
 ## Beginning:
-Execute the 'setup.m' script in order to set the path and compile the mex files. In folder demo there are three example for the usage of the package.
+Execute the 'setup.m' script in order to set the path and compile the mex files. In the folder demo there are three examples.
 
 The dominantset.m file perform the clustering. The helper associated to the dominantset.m file (type: help dominantset in your Matlab environment) will show you all the parameters and some hints.
 
 ## Requisite:
-No particular requisite are needed, the library run on any environment (Windows, Linux, Mac) and it has no dependencies. It has been tested on Matlab 2014b and 2016b in Windows/Linux and MacOSX. Some components are written in C for optimization purpose but equivalent Matlab code are available without the needing of compiling them.
+No particular requisite are needed, the library run on any environment (Windows, Linux, Mac) and it has no dependencies. It has been tested on Matlab 2014b,2016b,2018b in Windows/Linux and MacOSX. Some components are written in C/mex for optimization purpose but equivalent Matlab code are available without the needing of compiling it.
 
 ### What’s inside the package ?
 In this version of the library we have implemented the following papers: Pavan and Pelillo (2003, 2007); Rota Bulo and Bomze (2011); Vascon et al. (2013) and a still growing set of papers will be added in the future.
@@ -72,6 +72,6 @@ alternatively the clustering method can be called providing only the similarity 
 
 Step 4: Show the cluster results
 ```
-scatter(pts(:,1),pts(:,2),5,C); %show the points colored by cluster
+gscatter(pts(:,1),pts(:,2),C); %show the points colored by cluster
 ```
 The package comes with more complex examples and a deep inline documentation.

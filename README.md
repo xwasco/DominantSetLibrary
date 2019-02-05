@@ -17,14 +17,9 @@ If you use the prototype generation method please cite:
 
 If you use this implementation of the Dominant Set please cite this:
 @misc{vascon2017dominantsetlib,
-
   title = {{A Matlab library for the Dominant Set clustering }},
-  
-  author = {Sebastiano Vascon},
-  
-  howpublished = {\url{https://github.com/xwasco/DominantSetLibrary}},
-  
-  note = {Accessed: [Insert date here]}
+  author = {Sebastiano Vascon}, 
+  url = {https://github.com/xwasco/DominantSetLibrary},
 }
 
 

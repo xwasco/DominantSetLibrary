@@ -3,6 +3,8 @@ clear all
 
 clc
 
+addpath(genpath('../'));
+
 rng('default');
 
 %% Create a set of vertices (4 clusters)

@@ -1,6 +1,8 @@
 close all
 clear all
 
+addpath(genpath('../'));
+
 rng('default');                     %For reproducibility
 
 %% Step1: Create random points

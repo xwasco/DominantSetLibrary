@@ -58,6 +58,7 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %                       P{i}.avg is the centroid generated as the mean of points of cluster i.
 %                       P{i}.wavg is the centroid computed as the weighted mean of points of cluster i.
 %
+% MIT License
 % 2017, Sebastiano Vascon
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +106,7 @@ C=zeros(size(A,1),1);
 stat=[];
 
 if numel(nonzeros(A))==0 || isempty(A)
-    warning('DSLib: The similarity matrix is empty !');
+    warning('DSLib: The similarity matrix is empty!');
     stat=[0,0,0,0];
 end
 
@@ -134,7 +135,7 @@ while ~isempty(A) && numel(nonzeros(A))>0
     xid=x>supportThreshold;
     
     if sum(xid)==0
-        warning('The support of vector x is empty, consider lower the support threshold\n');
+        warning('DSLib: The support of vector x is empty, consider lower the support threshold\n');
         break;
     else
         [~,p]=max(x); p=d(p); %get the centroid id

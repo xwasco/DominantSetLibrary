@@ -2,7 +2,7 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %DOMINANTSET Extract all the dominant sets in a given weighted graph represented in terms of its weighted adjacency matrix.
 %
 % This package implements the following papers, the plan is to include more in the near future:
-% 
+%
 % [1] M. Pavan and M. Pelillo. Dominant sets and pairwise clustering. PAMI 2007
 %
 % If you use the Infection Immunization Dynamics (dynType = 1) please cite this work:
@@ -14,11 +14,11 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %
 %
 % If you use this library please cite the following paper:
-%    
 %
 %
-% Input: 
-%   A                   a matrix of pairwise affinities (nxn) where n is the number of elements. 
+%
+% Input:
+%   A                   a matrix of pairwise affinities (nxn) where n is the number of elements.
 %                       The matrix must NOT be of type sparse if dynType=1;
 %   x0                  The initial population state. If omitted or empty then x0 is located in the
 %                       baricenter of the n-dimensional symplex.
@@ -36,14 +36,14 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %                       one of [1]. The prototypes has been used in [3].
 %
 % Output:
-%   
+%
 %   C                   An nx1 vector with the assigments of points to cluster. C(i) returns the cluster assigned to the i-th node.
 %                       The value C(i)=0 means that the i-th node share no similarites with any node and thus can be considered as an outlier.
-%   
-%   stat                Is an mx4 matrix (where m is the number of dominant sets) in which each row correspond to a dominant set. 
+%
+%   stat                Is an mx4 matrix (where m is the number of dominant sets) in which each row correspond to a dominant set.
 %                       The content of each row is the following [Cohesiveness,Iterations,Precision,CentroidID]:
-%                       - Cohesiveness is a value of compactness/goodness of a cluster (higher the value more similar are the elements within it. 
-%                       - Iterations are the number of iterations needed by the dynamical system to converge. 
+%                       - Cohesiveness is a value of compactness/goodness of a cluster (higher the value more similar are the elements within it.
+%                       - Iterations are the number of iterations needed by the dynamical system to converge.
 %                       - Precision correspond the to the difference of two successive steps in the dynamical system.
 %                       - CentroidID is the id of the cluster centroid (the element with maximum value in the characteristic vector)
 %
@@ -60,7 +60,7 @@ function [ C,stat,S,P] = dominantset( A,x0,supportThreshold,precision,maxIters,d
 %
 % 2017, Sebastiano Vascon
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 if nargin<8
     pts=[];
@@ -73,7 +73,7 @@ end
 if nargin<6 || isempty(dynType)
     dynType=1;
 end
- 
+
 if nargin<5 || isempty(maxIters)
     maxIters=max(1000,10^(ceil(log10(size(A,1)))+1));
 end
@@ -90,9 +90,9 @@ if nargin<2 || isempty(x0)
     x0=ones(size(A,1),1); x0=x0./sum(x0);
 end
 
-if dynType==1 
+if dynType==1
     if issparse(A)
-        warning('DSLib: Matrix A cannot be of type SPARSE when dynType=1. Matrix A is going to be converted to full.'); 
+        warning('DSLib: Matrix A cannot be of type SPARSE when dynType=1. Matrix A is going to be converted to full.');
         A=full(A);
     end
 end
@@ -117,51 +117,54 @@ P=[];
 while ~isempty(A) && numel(nonzeros(A))>0
     x=x0(d); x=x./sum(x);
     
-        if dynType==1
-            if exist('inImDynC','file')==3
-                %if the mex exist use it
-                [x,iters,nasherror]=inImDynC(A,x,precision,int32(maxIters));    
-            else
-                [x,iters,nasherror]=inImDynM(A,x,precision,int32(maxIters));    
-            end
-        elseif dynType==2
-            [x,iters,nasherror]=ExpRepDyn(A,x,precision,maxIters,kappa);
+    if dynType==1
+        if exist('inImDynC','file')==3
+            %if the mex exist use it
+            [x,iters,nasherror]=inImDynC(A,x,precision,int32(maxIters));
         else
-            [x,iters,nasherror]=RepDyn(A,x,precision,maxIters);
+            [x,iters,nasherror]=inImDynM(A,x,precision,int32(maxIters));
         end
+    elseif dynType==2
+        [x,iters,nasherror]=ExpRepDyn(A,x,precision,maxIters,kappa);
+    else
+        [x,iters,nasherror]=RepDyn(A,x,precision,maxIters);
+    end
     
-        cohes=(x'*A)*x;
-        xid=x>supportThreshold;
+    cohes=(x'*A)*x;
+    xid=x>supportThreshold;
+    
+    if sum(xid)==0
+        warning('The support of vector x is empty, consider lower the support threshold\n');
+        break;
+    else
+        [~,p]=max(x); p=d(p); %get the centroid id
+        idx=d(xid);
         
-        [~,p]=max(x); p=d(p);
-        idx=d(xid);    
-    
-    
-    C(idx)=cid;
-    
-    if nargout>=2
-        stat(cid,:)=[cohes,iters,nasherror,p];
+        C(idx)=cid;
+        
+        if nargout>=2
+            stat(cid,:)=[cohes,iters,nasherror,p];
+        end
+        
+        if nargout>=3
+            S{cid,1}.index=idx;
+            S{cid,1}.cohesiveness=cohes;
+            S{cid,1}.iters=iters;
+            S{cid,1}.precision=nasherror;
+            S{cid,1}.centroid=p;
+        end
+        
+        if nargout>=4
+            P.avg(cid,:)=mean(pts(idx,:));
+            P.wavg(cid,:)=sum(repmat(x,1,size(pts,2)).*pts(d,:));
+        end
+        
+        %remove the unused edges and nodes, this improve the efficiency
+        d(xid)=[];
+        A(xid,:)=[];
+        A(:,xid)=[];
+        cid=cid+1;
     end
-    
-    if nargout>=3
-        S{cid,1}.index=idx;
-        S{cid,1}.cohesiveness=cohes;
-        S{cid,1}.iters=iters;
-        S{cid,1}.precision=nasherror;
-        S{cid,1}.centroid=p;
-    end    
-    
-    if nargout>=4
-        P.avg(cid,:)=mean(pts(idx,:));
-        P.wavg(cid,:)=sum(repmat(x,1,size(pts,2)).*pts(d,:));
-    end
-    
-    %remove the unused edges and nodes, this improve the efficiency
-    d(xid)=[];
-    A(xid,:)=[];
-    A(:,xid)=[];
-    cid=cid+1;
 end
 
 end
-

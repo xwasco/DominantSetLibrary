@@ -20,6 +20,8 @@ function [x,iters,NashError]=ExpRepDyn(A,x,toll,maxiter,kappa)
 %
 %   NashError   The precision reached by the dynamical system
 %
+% Released under: MIT License
+% 2019, Sebastiano Vascon
 
 NashError=2*toll;
     iters=0;

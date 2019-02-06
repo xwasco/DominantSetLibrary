@@ -23,6 +23,8 @@ function [x,iters,NashError] = inImDynM(A,x,toll,maxIters)
 % [2] S. Rota Bulo, and I. M. Bomze.  Infection and immunization:  a new class of evolutionarygame dynamics.
 % Games and Economic Behaviour, vol.  71, pp.  193–211, 2011.Special issue in honor of John F. Nash, jr.
 %
+% Released under: MIT License
+% 2019, Samuel Rota Bulo
 
     iters=1;
     NashError=2*toll;
